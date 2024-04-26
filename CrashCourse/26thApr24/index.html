@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="signup">
+        <h3>Signup Here.......</h3>
+        <input id="name" type="text" placeholder="Enter Name">
+        <input  id="email" type="text" placeholder="Enter Email">
+        <input id="Password" type="text" placeholder="Enter Password">
+        <button type="submit" onclick="signup()" value="SignUp....">SignUp... </button>
+    </div>
+
+    <div id="login">
+        <h3>Login Here.......</h3>
+        <input  id="lemail" type="text" placeholder="Enter Email">
+        <input id="lPassword" type="text" placeholder="Enter Password">
+        <button type="submit" onclick="login()" value="login....">login... </button>
+    </div>
+</body>
+<script>
+function signup(){
+    
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("Password").value;
+
+    let user = {name, email,password};
+    // user to load in the db.json
+
+    fetch("http://localhost:3000/users",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(user)
+    })
+    .then(()=>{
+        console.log("SignUp Sucessfull");
+        alert("SignUp Sucessfull, Please Login...")
+    }).catch((err)=>{
+        console.log("err",err)
+    })
+
+}
+
+async function login(){
+    // console.log("clicked")
+      
+    let lemail = document.getElementById("lemail").value;
+    let lPassword = document.getElementById("lPassword").value;
+    /// 1. get users from db, 
+    // 2. check the input email, 
+    // 3. if yes, then sucess
+    // if no, then user should register
+    let res = await fetch("http://localhost:3000/users");
+    let data = await res.json()
+    //console.log(data)
+    let flag = false
+    data.forEach((el,i)=>{
+        if(el.email == lemail){
+            if(el.password == lPassword ){
+                // it means user foundout
+                flag = true
+                localStorage.setItem("loginUser", JSON.stringify(el))
+                alert("Login Sucessfull")
+                window.location.href="products.html"
+            }else{
+                alert("Wrong Password")
+            }
+        }
+    })
+if(flag == false){
+    alert("User Not Found, Please Register")
+}
+    
+}
+</script>
+</html>
