@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #cont {
+        width: 60%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      #cont > div {
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      }
+      #cont > div > img {
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h4 id="total"></h4>
+    </div>
+    <div id="cont"></div>
+  </body>
+  <script>
+    window.onload = function () {
+      getData();
+    };
+    let cartArr = [];
+    let cont = document.getElementById("cont");
+    function getData() {
+      let data = JSON.parse(localStorage.getItem("cartArr"));
+      console.log(data);
+      displayData(data);
+      totalCartValue(data);
+    }
+
+    function displayData(arr) {
+      cont.innerHTML = "";
+      arr.map((el, i) => {
+        let card = document.createElement("div");
+        let h4 = document.createElement("h4");
+        h4.textContent = `Name: ${el.title}`;
+        let img = document.createElement("img");
+        img.src = el.image;
+        let h41 = document.createElement("h4");
+        h41.textContent = `price: ${el.price}`;
+        let h42 = document.createElement("h4");
+        h42.textContent = `rating: ${el.rating.rate}`;
+        let h43 = document.createElement("h4");
+        h43.textContent = `quantity: ${el.quantity}`;
+        let btn = document.createElement("button");
+        btn.textContent = `Delete`;
+        btn.addEventListener("click", function () {
+          delFn(el, i);
+        });
+
+        card.append(img, h4, h41, h42, h43, btn);
+        cont.append(card);
+      });
+      // cont.innerHTML = ans.join(" ")
+      //console.log("ans",ans)
+    }
+
+    function delFn(el, i) {
+      let data = JSON.parse(localStorage.getItem("cartArr"));
+      // data.splice(i,1)
+      // console.log("after deleting", data)
+
+      let updatedArr = data.filter((ele, index) => {
+        if (ele.id != el.id) {
+          return ele;
+        }
+      });
+      // can we two objects??
+
+      console.log("up", updatedArr);
+      localStorage.setItem("cartArr", JSON.stringify(updatedArr));
+      window.location.reload()
+    //   displayData(updatedArr);
+    //   totalCartValue(updatedArr);
+    }
+
+    function totalCartValue(arr) {
+      let ans = arr.reduce((a, el, i) => {
+        return a + (el.price*el.quantity);
+      }, 0);
+      document.getElementById(
+        "total"
+      ).textContent = `Total Cart Value:- Rs.${Math.floor(ans)}`;
+    }
+  </script>
+</html>

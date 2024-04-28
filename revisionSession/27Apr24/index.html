@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #cont {
+        width: 60%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      #cont > div {
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      }
+      #cont > div > img {
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cont"></div>
+  </body>
+  <script>
+    let cartArr = JSON.parse(localStorage.getItem("cartArr")) || [];
+    let cont = document.getElementById("cont");
+    async function getData() {
+      let res = await fetch("https://fakestoreapi.com/products");
+      // console.log("res", res.json())
+      let data = await res.json();
+      // console.log(data)
+      displayData(data);
+    }
+
+    getData();
+
+    function displayData(arr) {
+      arr.map((el, i) => {
+        //    return `<div>
+        //         <h4>Name: ${el.title}</h4>
+        //         <img src=${el.image} />
+        //         <h4>price: ${el.title}</h4>
+        //         <button onClick= "addfn()" >Add to Cart</button>
+        //     </div>`
+
+        let card = document.createElement("div");
+        let h4 = document.createElement("h4");
+        h4.textContent = `Name: ${el.title}`;
+        let img = document.createElement("img");
+        img.src = el.image;
+        let h41 = document.createElement("h4");
+        h41.textContent = `price: ${el.price}`;
+        let h42 = document.createElement("h4");
+        h42.textContent = `rating: ${el.rating.rate}`;
+        let Plusbtn = document.createElement("button");
+        Plusbtn.textContent = `+`;
+        let btn = document.createElement("button");
+        btn.textContent = `Add to Cart`;
+        let Minusbtn = document.createElement("button");
+        Minusbtn.textContent = `-`;
+        btn.addEventListener("click", function () {
+          addfn(el, i);
+        });
+        Plusbtn.addEventListener("click", function () {
+          plusfn(el, i);
+        });
+        el.quantity = 0;
+        // console.log(el)
+        card.append(img, h4, h41, h42, Plusbtn, btn, Minusbtn);
+        cont.append(card);
+      });
+      // cont.innerHTML = ans.join(" ")
+      //console.log("ans",ans)
+    }
+
+    function addfn(el, i) {
+      let flag = false;
+      let newCart = cartArr.map((ele, index) => {
+        // console.log(ele.id == el.id)
+        if (ele.id == el.id) {
+          alert(
+            "Item aleady present in that cart, use + button to update the quantity"
+          );
+        }
+        return;
+      });
+      console.log(newCart);
+      if (flag == false) {
+        el.quantity++;
+        cartArr.push(el);
+        alert("Item Added to Cart");
+      }
+
+     
+      localStorage.setItem("cartArr", JSON.stringify(cartArr));
+      window.location.reload();
+    }
+    function plusfn(el, i) {
+      let newCart = cartArr.map((ele, index) => {
+        // console.log(ele.id == el.id)
+        if (ele.id == el.id) {
+          ele.quantity++;
+          flag = true;
+          alert("Quanitiy Upadted");
+        }
+        return;
+      });
+    }
+  </script>
+</html>
