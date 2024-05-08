@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <button onClick="inc()">Increment</button>
+    <button onClick="dec()">Decrement</button>
+    <h1 id="text"></h1> -->
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    // simple counter app in normal js
+    // let count = 0; // scope??
+    // let text = document.getElementById("text");
+    // function inc() {
+
+    //   count++;
+    //   text.textContent = `Count: ${count}`;
+    // }
+
+    // function dec() {
+    //   count--;
+    //   text.textContent = `Count: ${count}`;
+    // }
+    // visiter count
+
+    ////////////////React starts here
+    //   function SimpleInput(){}
+
+    // function CounterApp(){
+    // let [count, setCount]  = React.useState(0);
+    // console.log("on load", count)
+    // function handleInc(){
+    //     console.log("before updation", count)
+    //     count = count+1;
+    //     setCount(count)
+    //     console.log("after updation", count)
+    // }
+
+    // function handleDec(){
+    //     console.log("before updation", count)
+    //     count = count-1;
+    //     setCount(count)
+    //     console.log("after updation", count)
+    // }
+    //     return(
+    //         <div>
+    //             <button onClick={handleInc}>INC</button>
+    //             <button onClick={handleDec} >DEC</button>
+    //             <h3>Count is:- {count}</h3>
+    //         </div>
+    //     )
+    // }
+
+    // function VisiterCount(){
+
+    // }
+
+    // function SimpleInput() {
+    //   const [data, setData] = React.useState([]);
+    //   const [inputvalue, setInputvalue] = React.useState("");
+    //   function handleChange(e) {
+    //     //console.log(e.target.value)
+    //     setInputvalue(e.target.value);
+    //   }
+    //   function handleSubmit() {
+    //     //console.log(inputvalue)
+    //     // console.log("before submit", data);
+    //     // data.push(inputvalue);
+    //     setData([...data, inputvalue]);
+    //     // console.log("after submit", data);
+    //   }
+    //   return (
+    //     <div>
+    //       <div>
+    //         <input
+    //           type="text"
+    //           value={inputvalue}
+    //           onChange={(e) => handleChange(e)}
+    //         />
+    //         <button onClick={handleSubmit}>Add Todo</button>
+    //       </div>
+    //       <ul>
+    //         {data.map((el, i) => {
+    //           return <li key={i}>{el}</li>;
+    //         })}
+    //       </ul>
+    //     </div>
+    //   );
+    // }
+
+    // function DymanicInput() {
+    //   // here the data/value in the input tags are it self in the array
+
+    //   const [inputData, setInputData] = React.useState([{ value: "" }]);
+    //   function handleChange(e, i) {
+    //     // this will not work, because it is not mutable
+    //     //inputData[i].value = e.target.value;
+    //     let arr = [...inputData];
+    //     arr[i].value = e.target.value;
+    //     // console.log( inputData)
+    //     setInputData(arr);
+    //     // console.log(inputData)
+    //   }
+    //   function AddHobbies() {
+    //     setInputData([...inputData, { value: "" }]);
+    //   }
+
+    //   function handleRemove(i) {
+    //     let filteredData = inputData.filter((ele, index) => {
+    //       return index != i;
+    //     });
+    //     setInputData(filteredData);
+    //   }
+
+    //   return (
+    //     <div>
+    //       {inputData.map((el, i) => {
+    //         return (
+    //           <div key={i}>
+    //             <input value={el.value} onChange={(e) => handleChange(e, i)} />
+    //             <button onClick={AddHobbies}>Add Hobbies</button>
+    //             <button
+    //               onClick={() => handleRemove(i)}
+    //               disabled={inputData.length <= 1}
+    //             >
+    //               Remove Hobbies
+    //             </button>
+    //           </div>
+    //         );
+    //       })}
+    //     </div>
+    //   );
+    // }
+    // ReactDOM.createRoot(document.getElementById("root")).render(
+    //   <DymanicInput />
+    // );
+  </script>
+</html>
