@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getPost()">Get Post</button>
+    <button onclick="postthePost()">Post The Post</button>
+    <button onclick="modifythePost()">Modify The Post by PUT</button>
+    <button onclick="patchthePost()">Patch The Post</button>
+    <button onclick="deletethePost()">Delete The Post</button>
+
+</body>
+<script>
+    function getPost(){
+        fetch("http://localhost:3000/posts").then((res)=> res.json()).then((data)=>{
+            console.log(data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    function postthePost(){
+        let obj =   {  title: "react", author: "props" }
+        fetch("http://localhost:3000/posts",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(obj)
+        }).then(()=>{
+            console.log("Data added")
+        }).catch(()=>{
+            console.log("failed to add")
+        })
+    }
+
+    function modifythePost(){
+        let obj =   {  title: "JavaScript" }
+        fetch("http://localhost:3000/posts/2",{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(obj)
+        }).then(()=>{
+            console.log("Data Updated")
+        }).catch(()=>{
+            console.log("failed to update")
+        })
+
+    }
+
+    function patchthePost(){
+        let obj =   {  title: "JavaScript" }
+        fetch("http://localhost:3000/posts/3",{
+            method:"PATCH",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(obj)
+        }).then(()=>{
+            console.log("Data Updated")
+        }).catch(()=>{
+            console.log("failed to update")
+        })
+    }
+
+    function deletethePost(){
+        fetch("http://localhost:3000/posts/5",{
+            method:"DELETE"
+        }).then(()=>{
+            console.log("Data Deleted")
+        }).catch(()=>{
+            console.log("failed to delete")
+        })
+    }
+</script>
+</html>
