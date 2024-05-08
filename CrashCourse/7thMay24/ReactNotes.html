@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+
+    function Greet(props) {
+      return (
+        <div>
+          <p>{props.message}, {props.name}</p>
+        </div>
+      );
+    }
+
+    function DisplayMessage({h1msg,pmsg}){
+      return(
+        <div>
+          <h1>{h1msg}</h1>
+          <p>{pmsg}</p>
+        </div>
+      )
+    }
+
+    function ItemList({ items }) {
+     return(
+      <ul>
+        {items.map((el,i)=>{
+        return <li key={i}>{el}</li>
+      })}
+      </ul>
+     )
+    }
+
+    let arr = ["one", "two", "three", "four"];
+    let arr2 = [1,2,3,4,5,6]
+    //.one
+    // .two
+    //.three
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <ItemList items = {arr} />
+    );
+  </script>
+</html>
