@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+      .card {
+        background-color: 	#808080;
+        display: flex;
+        width: 60%;
+        gap: 20px;
+        justify-content: space-around;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        gap: 20px;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    function TaskManager() {
+      const [inputData, setInputData] = React.useState("");
+      const [data, setData] = React.useState([]);
+
+      function getData() {
+        axios
+          .get("http://localhost:5000/todos")
+          .then((res) => setData(res.data))
+          .catch((err) => console.log(err));
+      }
+    
+       getData();
+   
+
+      function handleAddTask() {
+        let task = { title: inputData, status: false };
+        console.log(task);
+        // pass this one in db.json using axios
+        axios
+          .post("http://localhost:5000/todos", task)
+          .then(() => console.log("Task Added"))
+          .catch(() => console.log("Failed to add..."));
+      }
+
+      function handleChange(el, i) {
+        console.log(el);
+        console.log({ ...el, status: true });
+        axios
+          .patch(`http://localhost:5000/todos/${el.id}`, {
+            ...el,
+            status: !el.status,
+          })
+          .then(() => console.log("Task Updated"))
+          .catch(() => console.log("Failed to update..."));
+      }
+
+      function handleDelete(el, i) {
+        axios
+          .delete(`http://localhost:5000/todos/${el.id}`)
+          .then(() => console.log("Task Deleted"))
+          .catch(() => console.log("Failed to Deleted..."));
+      }
+
+      function handlefilter(e){
+        e.preventDefault()
+        console.log(e.target.value)
+       const status = e.target.value
+
+    //    console.log(`http://localhost:5000/todos?status=${status}`)
+        axios
+          .get(`http://localhost:5000/todos?status=${status}`)
+          .then((res) => setData(res.data))
+          .catch((err) => console.log(err));
+      }
+      return (
+        <div>
+          <select onChange={(e)=>handlefilter(e)}>
+            <option value="">Filter Task based on status</option>
+            <option value="true">Completed</option>
+            <option value="false">Pending</option>
+          </select>
+          <div>
+            <input
+              type="text"
+              placeholder="Enter Task"
+              onChange={(e) => setInputData(e.target.value)}
+              value={inputData}
+            />
+            <button onClick={handleAddTask}>ADD TASK</button>
+          </div>
+          {/*we need to display the tasks below*/}
+          <ul>
+            {data.map((el, i) => (
+              <li className="card" key={i}>
+                {el.title}
+                <span onClick={() => handleChange(el, i)}>
+                  {" "}
+                  status {el.status ? "completed" : "pending"}{" "}
+                </span>{" "}
+                <button onClick={() => handleDelete(el, i)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <TaskManager />
+    );
+  </script>
+</html>
