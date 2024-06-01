@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- styling by external sheet -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+      /* Internal styling */
+      /* h1{
+        color: red;
+        text-align: center;
+        text-decoration: underline;
+     } */
+      .red {
+        color: red;
+        text-align: center;
+        text-decoration: underline;
+      }
+      #para {
+        font-size: 25px;
+        color: pink;
+        text-align: right;
+      }
+      /* * {
+        background-color: aqua;
+        color: brown;
+      } */
+      /* combinators */
+      #firstdiv {
+        color: red;
+      }
+
+      #secondchild > h3{
+           color: blue;
+      }
+
+      #secondchild>h3+div{
+        color: blueviolet;
+      }
+      #firstSibling ~ div{
+        color: cadetblue;
+        text-align: center;
+        text-decoration: line-through;
+      }
+      /* Pseudo Class */
+      #btn{
+        width: 250px;
+        height: 80px;
+        margin-left: 30%;
+        background-color: cadetblue;
+        border: 2px solid whitesmoke;
+        color: whitesmoke;
+        font-weight: 900;
+        font-size: 25px;
+        border-radius: 10px;
+      }
+      #btn:hover{
+        background-color: whitesmoke;
+        color: cadetblue;
+        cursor: pointer;
+        border: 2px solid cadetblue;
+      }
+      /* pseudo elements */
+      #pseudo::before{
+        content: "This is ";
+        color: blue;
+        text-decoration: line-through;
+      }
+     
+
+    </style>
+  </head>
+  <body>
+    <!-- Inline Styling -->
+    <!-- selectors= giving them names and styling them all once,  -->
+    <!-- <h1 class="red">Hello students</h1>
+    <h1 style="color: blue">Welcome to the Revision Session</h1>
+    <h1 style="color: green">we will discuss combinators</h1>
+    <h1 class="red">and selectors</h1>
+    <p class="red para">This is called as class selectors</p>
+    <p id="para">This is called as Id selector</p> -->
+
+    <!-- <h1>Hello students</h1>
+    <h1>Welcome to the Revision Session</h1>
+    <h1>we will discuss combinators</h1>
+    <h1>and selectors</h1>
+    <p>This is called as class selectors</p>
+    <p>This is called as Id selector</p> -->
+
+    <!-- <div>
+      <h1>Hi students</h1>
+      <h4>This is universal selector</h4>
+      <a href="">Just wait and watch</a>
+    </div> -->
+
+    <!-- combinators -->
+    <!-- <div id="firstdiv">
+        <h3>Hello Students</h3>
+        <div>
+                <h2>Welocme to Revison session</h2>
+                <div>
+                    <p>We are now discussing combinators</p>
+                </div>
+        </div>
+    </div>
+    <div id="secondchild">
+        <h3>Hello Students</h3>
+        <div id="firstSibling">
+                <h2>Welocme to Revison session</h2>
+                <div>
+                    <p>We are now discussing combinators</p>
+                </div>
+        </div>
+        <div>
+                <h2>Welocme to Revison session</h2>
+                <div>
+                    <p>We are now discussing combinators</p>
+                </div>
+        </div>
+        <div>
+                <h2>Welocme to Revison session</h2>
+                <div>
+                    <p>We are now discussing combinators</p>
+                </div>
+        </div>
+        <h1> This is last sibling</h1>
+    </div> -->
+    <!-- pseudo class -->
+    <button id="btn">Click Me</button>
+    <h3 id="pseudo">Pesudo Element</h3>
+  </body>
+  <script>
+    // 1. Tag selector => selected by tag name h1, p,h4
+    // 2. class selector => selected by its class name, using "."
+    // 3. id selector => selected by its id name, using "#"
+    // 4 Universal selector=> selects everything, uisng "*"
+
+    // combinators helps you to combine one or more selectors
+    //1. Descendent combinator=> everybody in its family denoted " ", 
+    //2. chid combinator => next generation , denoted ">"
+    //3. Immediate sibling combinator=> just next sibling, denoted "+"
+    //4. General Sibling Combinator=> all siblings, denoted by "~" (tilda)
+     
+    // pseudo class:
+    // pseudo=> it is there but no seen.
+    // best example is hover
+    // for button on hover, styling everything opposite
+    //pseudo element
+    //
+    // n-th child
+  </script>
+</html>
